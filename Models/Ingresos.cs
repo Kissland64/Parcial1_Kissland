@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-public class Registro{
+public class Ingresos{
     public int IngresoId{get; set;}
 
     [Required(ErrorMessage = "Este campo es necesario")]
