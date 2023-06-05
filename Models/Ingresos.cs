@@ -1,15 +1,18 @@
 using System.ComponentModel.DataAnnotations;
 
-public class Ingresos{
-    public int IngresoId{get; set;}
+public class Ingresos
+{
+
+    [Key]
+    public int IngresoId { get; set; }
 
     [Required(ErrorMessage = "Este campo es necesario")]
-    public int Fecha{get; set;}
+    public int Fecha { get; set; }
 
     [Required(ErrorMessage = "Este campo es necesario")]
-    public string Concepto{get; set;} = string.Empty;
+    public string Concepto { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Este campo es necesario")]
-    [Range(1,5000)]
-    public int Monto{get; set;}
+    [Range(1, 5000)]
+    public int Monto { get; set; }
 }
