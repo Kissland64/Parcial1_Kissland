@@ -7,7 +7,7 @@ public class Ingresos
     public int IngresoId { get; set; }
 
     [Required(ErrorMessage = "Este campo es necesario")]
-    public int Fecha { get; set; }
+    public DateTime Fecha { get; set; }
 
     [Required(ErrorMessage = "Este campo es necesario")]
     public string Concepto { get; set; } = string.Empty;

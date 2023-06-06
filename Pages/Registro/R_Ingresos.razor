@@ -1,0 +1,78 @@
+@page "/RegistroIngresos"
+@inject IngresosBLL IngresosBLL
+<EditForm Model="ingresos">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="card">
+
+        <div class="card-header">
+            <h1>Registro de Ingresos</h1>
+        </div>
+
+        <div class="card-body">
+            <label>Id</label>
+            <InputNumber @bind-Value="ingresos.IngresoId" class="form-control"></InputNumber>
+            <button class="btn btn-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Fecha</label>
+                    <InputNumber @bind-Value="ingresos.Fecha" class="form-control"></InputNumber>
+                    <ValidationMessage For="@(() => ingresos.Fecha)" />
+                </div>
+                <div class="col-md-6">
+                    <label>Concepto</label>
+                    <InputText @bind-Value="ingresos.Concepto" class="form-control"></InputText>
+                    <ValidationMessage For="@(() => ingresos.Concepto)" />
+                </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Monto</label>
+                    <InputNumber @bind-Value="ingresos.Monto" class="form-control"></InputNumber>
+                    <ValidationMessage For="@(() => ingresos.Monto)" />
+                </div>
+            </div>
+        </div>
+
+    <div class="card-footer d-flex justify-content-center">
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file"/></button>
+                <button type="submit" class="btn btn-outline-success">Guardar <i class="oi oi-document"/></button>
+                <button type="submit" class="btn btn-outline-success">Eliminar <i class="oi oi-document"/></button>
+            </div>
+        </div>
+        
+
+</EditForm>
+
+@code{
+    public Ingresos ingresos { get; set; } = new Ingresos();
+
+    void Buscar()
+    {
+        var ingresosEnc = IngresosBLL.Buscar(ingresos.IngresoId);
+        if(ingresosEnc != null)
+            ingresosEnc = ingresos;
+    }
+    void Guardar()
+    {
+        if(!Validate())
+            return;
+        if(IngresosBLL.Guardar(ingresos))
+        {
+            Nuevo();
+        }
+    }
+    void Nuevo()
+    {
+        ingresos = new Ingresos();
+    }
+
+    bool Validate()
+    {
+        if(ingresos.IngresoId < 0)
+            return false;
+        if(ingresos.Monto < 0)
+            return false;
+        else
+            return true;
+    }
+}
