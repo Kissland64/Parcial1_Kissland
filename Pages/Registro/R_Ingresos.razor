@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label>Fecha</label>
-                    <InputNumber @bind-Value="ingresos.Fecha" class="form-control"></InputNumber>
+                    <InputDate @bind-Value="ingresos.Fecha" class="form-control"></InputDate>
                     <ValidationMessage For="@(() => ingresos.Fecha)" />
                 </div>
                 <div class="col-md-6">
@@ -36,9 +36,9 @@
             <div class="btn-group">
                 <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file"/></button>
                 <button type="submit" class="btn btn-outline-success">Guardar <i class="oi oi-document"/></button>
-                <button type="submit" class="btn btn-outline-success">Eliminar <i class="oi oi-document"/></button>
-            </div>
+                <button type="submit" class="btn btn-outline-secondary">Eliminar <i class="oi oi-document"/></button>
         </div>
+    </div>
         
 
 </EditForm>
