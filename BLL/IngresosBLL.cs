@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 public class IngresosBLL{
@@ -28,9 +29,22 @@ public class IngresosBLL{
         return _context.SaveChanges()>0;
     }
 
+    public bool Eliminar(Ingresos ingresos)
+    {
+        _context.ingreso.Remove(ingresos);
+        int eliminado = _context.SaveChanges();
+        return eliminado > 0;
+    }
+
     public Ingresos? Buscar(int ingresoId){
         return _context.ingreso.Where(i => i.IngresoId == ingresoId)
             .AsNoTracking()
             .SingleOrDefault();
+    }
+    public List<Ingresos> Listar(Expression<Func<Ingresos, bool>> Criterio)
+    {
+        return _context.ingreso
+            .Where(Criterio)
+            .AsNoTracking().ToList();
     }
 }
