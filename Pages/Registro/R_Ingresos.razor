@@ -17,7 +17,7 @@
                 <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="BotonBuscar"><i class ="oi oi-magnifying-glass"/></button>
                 </div>
             </div>
-            <div class="Fecha">
+            <div class="mb-3">
                 <label class="form-label" for="Fecha">Fecha:</label>
                 <InputDate @bind-Value="ingresos.Fecha" class="form-control" />
                 <ValidationMessage For="@(() => ingresos.Fecha)" />
@@ -31,7 +31,7 @@
                 <label class="form-label" for="Monto">Monto:</label>
                 <InputNumber @bind-Value="ingresos.Monto" class="form-control"/>
                 <ValidationMessage For="@(() => ingresos.Monto)" />
-            
+                    
                 <div class="card-footer d-flex justify-content-center">
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file"/></button>
@@ -63,13 +63,14 @@
 
     void Guardar()
     {
-        if(!Validate())
+        if(Validate())
             return;
         if(IngresosBLL.Guardar(ingresos))
         {
             Nuevo();
         }
     }
+
     void Nuevo()
     {
         ingresos = new Ingresos();
@@ -77,10 +78,12 @@
 
     public void Eliminar()
     {
-        Buscar();
-        if (IngresosBLL.Eliminar(this.ingresos))
+        if(Validate())
         {
-            Nuevo();
+            if (IngresosBLL.Eliminar(this.ingresos))
+            {
+                Nuevo();
+            }
         }
     }
 

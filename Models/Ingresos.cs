@@ -13,6 +13,6 @@ public class Ingresos
     public string Concepto { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Este campo es necesario")]
-    [Range(1, 5000)]
+    [Range(1, 25000, ErrorMessage = "El precio debe estar entre {1} y {2}")]
     public int Monto { get; set; }
 }
